@@ -2,7 +2,7 @@
 frontend/node-modules/
 
 # secret files
-**/.env
+**/backend/.env
 **/.env.local
 **/.env.*.local
 
