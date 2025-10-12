@@ -1,6 +1,11 @@
 # node modules in local
 frontend/node-modules/
 
+# secret files
+**/.env
+**/.env.local
+**/.env.*.local
+
 # cache files
 **/__pycache__/
 
