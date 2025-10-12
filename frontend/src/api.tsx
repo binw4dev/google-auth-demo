@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "https://google-auth-demo-1.onrender.com";
 
 export const googleLogin = async (idToken: string): Promise<any> => {
   const res = await axios.post(`${API_BASE}/api/auth/google`, { id_token: idToken });
