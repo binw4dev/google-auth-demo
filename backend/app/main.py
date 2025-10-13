@@ -22,5 +22,5 @@ def get_me(authorization: str = Header(None)):
     token = authorization.replace("Bearer ", "")
     logger.debug(f"main get_me token: {token}")
     user = dependencies.get_current_user(token)
-    logger.info(f"main get_me user: email{user.email}, name{user.name}, role{user.role}")
+    logger.info(f"main get_me user: email: {user.email}, name: {user.name}, role: {user.role}")
     return {"email": user.email, "name": user.name, "role": user.role}

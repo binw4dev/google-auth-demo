@@ -6,7 +6,7 @@ from . import models, schemas, config
 import logging
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
-logger = logging.getLogger("app")  # 获取统一 logger
+logger = logging.getLogger("app")  # get logger
 
 @router.post("/google", response_model=schemas.TokenResponse)
 def google_login(payload: schemas.GoogleLoginRequest):
