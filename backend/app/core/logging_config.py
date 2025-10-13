@@ -3,46 +3,46 @@ import sys
 import os
 from datetime import datetime
 
-# ANSI 颜色码定义
+# ANSI color codes for different log levels
 COLORS = {
-    "DEBUG": "\033[37m",   # 灰
-    "INFO": "\033[32m",    # 绿
-    "WARNING": "\033[33m", # 黄
-    "ERROR": "\033[31m",   # 红
-    "CRITICAL": "\033[41m" # 红底
+    "DEBUG": "\033[37m",   # gray
+    "INFO": "\033[32m",    # green
+    "WARNING": "\033[33m", # yellow
+    "ERROR": "\033[31m",   # red
+    "CRITICAL": "\033[41m" # red background
 }
 RESET = "\033[0m"
 
 class ColorFormatter(logging.Formatter):
-    """带颜色的日志格式器"""
+    """logging formatter with colors"""
     def format(self, record):
         log_color = COLORS.get(record.levelname, "")
         message = super().format(record)
         return f"{log_color}{message}{RESET}"
 
 def setup_logging(log_dir="logs"):
-    """集中配置日志"""
+    """logging setup with console and file handlers"""
     os.makedirs(log_dir, exist_ok=True)
     log_file_path = os.path.join(
         log_dir, f"app_{datetime.now().strftime('%Y%m%d')}.log"
     )
 
-    # 日志格式
+    # log formatter
     formatter = logging.Formatter(
         fmt="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S"
     )
     color_formatter = ColorFormatter(formatter._fmt, formatter.datefmt)
 
-    # 控制台输出（带颜色）
+    # logging handlers - console
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(color_formatter)
 
-    # 文件输出（不带颜色）
+    # logging handlers - file
     file_handler = logging.FileHandler(log_file_path, encoding="utf-8")
     file_handler.setFormatter(formatter)
 
-    # 初始化 root logger
+    # Initialize root logger
     logging.basicConfig(
         level=logging.INFO,
         handlers=[console_handler, file_handler]

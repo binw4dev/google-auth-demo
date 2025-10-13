@@ -8,7 +8,7 @@ logger = setup_logging()
 app = FastAPI()
 app.include_router(auth.router)
 
-# 允许本地 React 前端访问
+# allow CORS from frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[f"https://google-auth-demo-frontend-dev.onrender.com"],
