@@ -8,7 +8,7 @@ app.include_router(auth.router)
 # 允许本地 React 前端访问
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[f"http://localhost:5173"],
+    allow_origins=[f"https://google-auth-demo-frontend-dev.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

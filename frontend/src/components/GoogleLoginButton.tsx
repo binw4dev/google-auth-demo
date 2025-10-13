@@ -15,7 +15,7 @@ interface GoogleLoginButtonProps {
 export default function GoogleLoginButton({ onLogin }: GoogleLoginButtonProps) {
   useEffect(() => {
     google.accounts.id.initialize({
-      client_id: "YOUR_GOOGLE_CLIENT_ID",
+      client_id: "1051103924645-mmlfpc1ara82g8da5lhcmsf35slrrcju.apps.googleusercontent.com",
       callback: handleCredentialResponse,
     });
     google.accounts.id.renderButton(

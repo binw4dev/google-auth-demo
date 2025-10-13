@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "https://google-auth-demo-1.onrender.com";
+const API_BASE = "https://google-auth-demo-backend-dev.onrender.com";
 
 export const googleLogin = async (idToken: string): Promise<any> => {
   const res = await axios.post(`${API_BASE}/api/auth/google`, { id_token: idToken });
