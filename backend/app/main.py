@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Header, Depends
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from . import auth, dependencies
 from app.core.logging_config import setup_logging
@@ -8,19 +8,20 @@ logger = setup_logging()
 app = FastAPI()
 app.include_router(auth.router)
 
-# allow CORS from frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[f"https://google-auth-demo-frontend-dev.onrender.com"],
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 @app.get("/api/me")
-def get_me(authorization: str = Header(None)):
+async def get_me(authorization: str = Header(None)):
+    if not authorization:
+        raise HTTPException(status_code=401, detail="Missing Authorization header")
     token = authorization.replace("Bearer ", "")
     logger.debug(f"main get_me token: {token}")
-    user = dependencies.get_current_user(token)
-    logger.info(f"main get_me user: email: {user.email}, name: {user.name}, role: {user.role}")
-    return {"email": user.email, "name": user.name, "role": user.role}
+    user = await dependencies.get_current_user(token)
+    logger.info(f"main get_me user: email: {user['email']}, name: {user['name']}, role: {user['role']}")
+    return user

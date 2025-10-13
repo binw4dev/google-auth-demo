@@ -9,6 +9,9 @@ frontend/node-modules/
 # cache files
 **/__pycache__/
 
+# test
+**/test/
+
 # Log file
 *.log
 
