@@ -2,6 +2,7 @@ from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from . import auth, dependencies
 from app.core.logging_config import setup_logging
+from .config import ALLOW_CORS
 
 logger = setup_logging()
 
@@ -10,7 +11,7 @@ app.include_router(auth.router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://google-auth-demo-frontend-dev.onrender.com"],
+    allow_origins=[ALLOW_CORS],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
