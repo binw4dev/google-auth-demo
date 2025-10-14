@@ -10,4 +10,4 @@ JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 MONGO_URI = os.getenv("MONGO_URI", "")
 MONGO_DB = os.getenv("MONGO_DB", "google-auth-demo")
 
-ALLOW_CORS = os.getenv("ALLOW_CORS", "*").split(",")
+ALLOW_CORS = os.getenv("ALLOW_CORS", "*")
